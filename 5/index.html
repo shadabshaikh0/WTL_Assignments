@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+            <center><h1> Employee Analysis </h1> </center>
+            <hr>
+            
+            <div style="width: 100%;">
+                <div style="width: 50%;float: left;" class="row">
+
+                    <table id="emptable" border="1" >
+                        <tr>
+                            <th>Name</th>
+                            <th>Id</th>
+                            <th>Department</th>
+                            <th>Salary</th>
+                        </tr>        
+                    </table>        
+
+                </div>
+
+                <div style="width: 50%;float: right;">
+
+                    <table id="avgsalary" border="1" >
+                        <tr>
+                            <th>Department</th>
+                            <th>Average Salary</th>
+                            <th>Employee Count</th>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <div style="clear:both" ></div>
+            <hr>
+    </body>
+
+    <script>
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if( this.readyState ==4  && this.status ==200 ){
+                processfile(this);
+            }
+        }
+        xhttp.open("GET","employee.xml",true);
+        xhttp.send();
+
+        function processfile(xml)
+        {
+            var xmldoc = xml.responseXML;
+            console.log(xmldoc);
+            
+            var table  = document.getElementById("emptable").innerHTML;
+
+            var emparray = xmldoc.getElementsByTagName("employee");
+            var compsal = 0,mechsal =0,gamesal = 0;
+            var compcnt = 0,mechcnt =0,gamecnt = 0;
+
+            for(var i=0;i<emparray.length;i++){
+                var name = emparray[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                var id = emparray[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                var department = emparray[i].getElementsByTagName("department")[0].childNodes[0].nodeValue;
+                var salary = emparray[i].getElementsByTagName("salary")[0].childNodes[0].nodeValue;
+
+                switch(department){
+                    case "Computer":
+                        compcnt++;
+                        compsal += salary;
+                    break;
+                    case "Mechanical":
+                        mechcnt++;
+                        mechsal += salary;
+                    break;
+                    case "Gaming":
+                        gamecnt++;
+                        gamesal += salary;
+                    break;
+                }
+                
+                table = table + "<tr><td>"+name+"</td><td>"+ id+"</td><td>"+department+"</td><td>"+salary+"</td></tr>";
+            }
+            document.getElementById("emptable").innerHTML = table;
+
+            var mechavg = mechsal/mechcnt;
+            var compavg = compsal/compcnt;
+            var gameavg = gamesal/gamecnt;
+
+            var avgtable = document.getElementById("avgsalary").innerHTML;
+            avgtable = avgtable + "<tr><td> Mechanical</td><td>"+mechavg+"</td><td>"+mechcnt+"</td></tr>";             
+            avgtable = avgtable + "<tr><td> Computer</td><td>"+compavg+"</td><td>"+compcnt+"</td></tr>";             
+            avgtable = avgtable + "<tr><td> Gaming</td><td>"+gameavg+"</td><td>"+gamecnt+"</td></tr>";
+
+            document.getElementById("avgsalary").innerHTML = avgtable;             
+        }
+
+    </script>
+</html>

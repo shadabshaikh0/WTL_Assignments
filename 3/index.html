@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+            <center><h1> Student Result </h1> </center>
+            <hr>
+            
+            <div style="width: 100%;">
+                <div style="width: 40%;float: left;" class="row">
+                    <div style="width: 20%;float: left;" >
+
+                    </div>
+                    <div style="width: 80%;float: right;" >
+                        <form name="form" onsubmit="return calc()" >
+                                Name:<br>
+                                    <input type ="text" id="name" placeholder="Enter Name"/> <br><br>
+                                Subject1:<br>
+                                    <input type ="number" id="sub1" placeholder="Enter marks" min="0" max="100" /> <br><br>
+                                Subject2:<br>
+                                    <input type ="number" id="sub2" placeholder="Enter marks" min="0" max="100" /> <br><br>
+                                Subject3:<br>
+                                    <input type ="number" id="sub3" placeholder="Enter marks" min="0" max="100" /> <br><br>
+                                Subject4:<br>
+                                    <input type ="number" id="sub4" placeholder="Enter marks" min="0" max="100" /> <br><br>
+                                Subject5:<br>
+                                    <input type ="number" id="sub5" placeholder="Enter marks" min="0" max="100"  /> <br><br>
+                    
+                                    <input name="submit" type="submit" value="Submit" />
+                                    <input type="reset" value="Reset" /> <br>
+                                        
+                        </form>            
+                    </div>
+                </div>
+                <div style="width: 60%;float: right;">
+
+                    <table id="data-content" border="1" >
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Subject1</th>
+                            <th>Subject2</th>
+                            <th>Subject3</th>
+                            <th>Subject4</th>
+                            <th>Subject5</th>
+                            <th>Percentage</th>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+            <div style="clear:both" ></div>
+            <hr>
+    </body>
+
+    <script>
+            function calc(){
+
+                var table = document.getElementById("data-content").innerHTML;
+
+                var name = document.getElementById("name").value;
+                var sub1 = parseInt( document.getElementById("sub1").value ) ;
+                var sub2 = parseInt( document.getElementById("sub2").value ) ;
+                var sub3 = parseInt( document.getElementById("sub3").value ) ;
+                var sub4 = parseInt( document.getElementById("sub4").value ) ;
+                var sub5 = parseInt( document.getElementById("sub5").value ) ;
+
+                var percentage = parseFloat ( (sub1+sub2+sub3+sub4+sub5)/500*100 ) ;
+                
+                var records = "<tr><td>"+name+"</td><td>"+sub1+"</td><td>"+sub2+"</td><td>"+sub3+"</td><td>"+sub4+"</td><td>"+sub5+"</td><td>"+percentage.toFixed(2)+"%</td></tr>"
+                table = table + records;
+                document.getElementById("data-content").innerHTML = table;
+                return false;
+            }
+    </script>
+</html>

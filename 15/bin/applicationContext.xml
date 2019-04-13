@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="fortune" class="com.shadab.FortuneService">
+    	<property name="fortune" value="Bad Day"></property>
+    </bean>
+	    
+    <bean id="cricketcoach" class="com.shadab.CricketCoach">
+    	<constructor-arg ref="fortune"></constructor-arg>
+    </bean>
+    <bean id="baseballcoach" class="com.shadab.BaseballCoach">
+        	<constructor-arg ref="fortune"></constructor-arg>
+    </bean>
+    
+</beans>

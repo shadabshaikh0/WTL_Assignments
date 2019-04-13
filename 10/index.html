@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <style>
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>     
+            var app = angular.module("cal",[]);
+            app.controller("cntrl",function($scope){
+
+                $scope.add = function(){
+                    var a = Number($scope.num1);
+                    var b = Number($scope.num2);
+                    $scope.result = a+b;
+                }
+                $scope.sub = function(){
+                    var a = Number($scope.num1);
+                    var b = Number($scope.num2);
+                    $scope.result = a-b;
+                }
+                $scope.mul = function(){
+                    var a = Number($scope.num1);
+                    var b = Number($scope.num2);
+                    $scope.result = a*b;
+                }
+                $scope.div = function(){
+                    var a = Number($scope.num1);
+                    var b = Number($scope.num2);
+                    $scope.result = a/b;
+                }
+
+            });        
+        </script>
+            
+    </head>
+    <body>
+            <center><h1> Currency Converter </h1> </center>
+            <hr>
+                <div ng-app="cal" ng-controller="cntrl">
+
+                    <input type="number" ng-model="num1" placeholder="Number 1" />
+                    <input type="number" ng-model="num2" placeholder="Number 2" />
+
+                    <input type="text" ng-model="result" placeholder="Result">
+
+                    <div>
+                        <input type="button" value="+" class="btn" ng-click="add()">
+                        <input type="button" value="-" class="btn" ng-click="sub()">
+                    </div>
+                    <div>
+                        <input type="button" value="*" class="btn" ng-click="mul()">
+                        <input type="button" value="/" class="btn" ng-click="div()">
+                    </div>
+
+                </div>            
+            <hr>
+    </body>
+
+</html>

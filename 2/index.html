@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <style>
+                div.row{
+                    padding-left: 40%;
+                }
+        </style>
+    </head>
+    <body>
+            <center><h1> Seminar Registration </h1> </center>
+            <hr>
+            
+            <div class="row">
+                <form action="payment.html" name="form" >
+                    Name:<br>
+                        <input type ="text" name="name" onblur="validate(this.name)" placeholder="Enter Name"/> <br><br>
+                    Email:<br>
+                        <input type ="text" name="email" onblur="validate(this.name)" placeholder="Enter Email"/> <br><br>
+                    Mobile No:<br>
+                        <input type ="text" name="mobile" onblur="validate(this.name)" placeholder="Enter Mobile No"/> <br><br>
+                    Designation:<br>
+                        <select name="designation" onblur="validate(this.name)" >
+                            <option> Student </option>
+                            <option> Company </option>
+                            <option> Faculty </option>
+                        </select>
+                        <br>
+                    Country:<br>
+                    <select name="country" onblur="validate(this.name)" >
+                        <option> India </option>
+                        <option> Russia </option>
+                        <option> US </option>
+                    </select>
+                    <br><br>
+        
+                        <input name="submit" type="submit" value="Submit" />
+                        <input type="reset" value="Reset" /> <br>
+                        
+                </form>
+            </div>
+            <hr>
+    </body>
+
+    <script>
+            
+        var submitbtn = document.getElementsByName("submit")[0];
+        function checkName(){
+
+            var name = document.getElementsByName("name")[0];
+
+            if( ! ( /^[a-zA-Z]+$/ ).test(name.value)   ){
+                alert("Name should contain only alphabet letters")
+                submitbtn.disabled = true
+            }
+            else{
+                submitbtn.disabled = false                
+            }
+
+        }
+        function checkEmail(){
+            var email = document.getElementsByName("email")[0];  
+
+            if( ! ( /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/ ).test(email.value)   ){
+                alert("Invalid Email")
+                submitbtn.disabled = true
+            }
+            else{
+                submitbtn.disabled = false                
+            }
+            
+        }
+        function checkMobile(){
+
+            var mobile = document.getElementsByName("mobile")[0];
+
+            if( ! ( /^[987]{1}[0-9]{9}$/ ).test(mobile.value)   ){
+                alert("Invalid Mobile")
+                submitbtn.disabled = true
+            }
+            else{
+                submitbtn.disabled = false                
+            }
+            
+        }
+
+        function validate(input){
+
+            switch(input){
+                case "name":
+                    checkName()
+                break
+                case "email":
+                   checkEmail()
+                break
+                case "mobile":
+                    checkMobile()
+                break                
+            }
+
+        }
+    </script>
+</html>

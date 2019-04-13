@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <style>
+                div.row{
+                    padding-left: 40%;
+                }
+        </style>
+    </head>
+    <body>
+            <center><h1> Customer Information </h1> </center>
+            <hr>
+            
+            <div class="row">
+                <form name="cform" onsubmit="process()">
+                    Name:<br>
+                        <input type ="text" name="cname" placeholder="Enter Name"/> <br><br>
+                    Address:<br>
+                        <input type ="text" name="caddress" placeholder="Enter Address"/> <br><br>
+                    Gender:<br>
+                        <input type ="radio" name="cgender" value="Male" /> Male <br><br>
+                        <input type ="radio" name="cgender" value="Female" /> Female <br><br>
+                    Language Known:<br>
+                        <select name="clanguage">
+                            <option> Hindi </option>
+                            <option> English </option>
+                            <option> Marathi </option>
+                        </select>
+                        <br><br>
+                    City:<br>
+                        <input type ="text" name="ccity" placeholder="Enter City Name"/> <br><br><br>
+        
+                        <input type="submit" value="Submit" />
+                        <input type="reset" value="Reset" /> <br>
+                        
+                </form>
+            </div>
+            <hr>
+    </body>
+
+    <script>
+        function process(){
+
+            // Step1: Create xml file content 
+            var text = "<?xml version='1.0' encoding='UTF-8' ?>";
+            
+            // Step2: Create xsl file link
+           text += " <?xml-stylesheet type='text/xsl' href='/home/shadab/Downloads/WT LAB/WT LAB/Final/1/Customer.xsl' ?> ";
+
+            //Step3:  Create template for xml file content in string format
+
+            text += " <customer>";
+            text += " <name>Default</name>";
+            text += " <address>Default</address>";
+            text += " <gender>Default</gender>";
+            text += " <language>Default</language>";
+            text += " <city>Default</city>";
+            text += " </customer>";
+            
+            var parser,xmldoc;
+            parser = new DOMParser();
+            xmldoc = parser.parseFromString(text,'text/xml');
+            xmldoc.getElementsByTagName("name")[0].childNodes[0].nodeValue = document.getElementsByName('cname')[0].value
+            xmldoc.getElementsByTagName('address')[0].childNodes[0].nodeValue = document.getElementsByName('caddress')[0].value
+            xmldoc.getElementsByTagName('gender')[0].childNodes[0].nodeValue = document.getElementsByName('cgender')[0].value
+            xmldoc.getElementsByTagName('language')[0].childNodes[0].nodeValue = document.getElementsByName('clanguage')[0].value
+            xmldoc.getElementsByTagName('city')[0].childNodes[0].nodeValue = document.getElementsByName('ccity')[0].value
+
+            var xmlstring = new XMLSerializer().serializeToString(xmldoc);
+
+            var element = document.createElement('a');
+            element.setAttribute('href','data:text/xml;charset=utf-8,'+xmlstring)
+            element.setAttribute('download','Shadab.xml')
+            element.style.display = 'none'
+            document.body.appendChild(element)
+            element.click()
+        }
+    </script>
+</html>
